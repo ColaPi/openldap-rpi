@@ -1,0 +1,14 @@
+version: '3'
+services: 
+  openldap:
+    build: 
+      context: .
+    container_name: openldap
+    image: colachen/openldap-rpi
+    ports: 
+      - 389:389
+    environment: 
+      - ORGANISATION_NAME=Colachg Inc
+      - TLS_VERIFY_CLIENT=never
+    volumes: 
+      - ${PWD}/config/ldap_data:/var/lib/openldap/openldap-data

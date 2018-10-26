@@ -1,0 +1,16 @@
+sudo: required
+dist: trusty
+language: bash
+
+jobs:
+  include:
+    - stage: build image
+      script:
+        - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+            TAG=v`date +"%Y%m%d"`;
+            docker run --rm --privileged multiarch/qemu-user-static:register --reset;
+            docker build . -t colachen/openldap-rpi:latest -t colachen/openldap-rpi:$TAG;
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin;
+            docker push colachen/openldap-rpi:$TAG;
+            docker push colachen/openldap-rpi:latest;
+          fi
