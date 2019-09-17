@@ -1,4 +1,4 @@
-FROM resin/raspberrypi3-alpine
+FROM balenalib/raspberrypi3-alpine
 
 ENV ORGANISATION_NAME "colachg Inc"
 ENV SUFFIX "dc=colachg,dc=com"
